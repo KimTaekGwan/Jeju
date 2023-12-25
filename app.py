@@ -273,7 +273,7 @@ def search_price(item, corporation, location, d):
         return True, df['price'].values[0]
     else:
         # 비어있으면 0 반환
-        return False, '해당 데이터가 없습니다.'
+        return False, '해당 실제 데이터가 없습니다.'
 
 # Streamlit 애플리케이션을 정의합니다.
 def run_app():
@@ -298,11 +298,11 @@ def run_app():
         
         # col1에는 예측값과 실제값 결과와, 해당 결과에 대한 설명(예측값과 실제값의 차이)
         col1.write(f"예측값: {pred}")
-        col1.write(f"실제값: {actual_p}")
-        col1.write(f"차이: {abs(pred - actual_p)}")
         
         # col2에는 실제값과 예측값 bar plot 시각화
         if search:
+            col1.write(f"실제값: {actual_p}")
+            col1.write(f"차이: {abs(pred - actual_p)}")
             fig, ax = plt.subplots(figsize=(10, 5))
             ax.bar(['Actual', 'Predict'], [actual_p, pred])
             ax.set_title('Actual vs. Predict')
